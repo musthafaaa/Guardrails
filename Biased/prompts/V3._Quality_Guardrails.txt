@@ -1,0 +1,97 @@
+Only for original-code
+
+## **Objective**
+Generate the complete matching test suite—including unit, integration, and contract tests—for each generated piece of the application code (original-code).
+For **every class/module/chunk of code generated**, immediately produce a **balanced set of tests**:
+
+* **Unit Tests** (80–90% of the chunk’s codebase)
+* **Integration Tests** (70–80% of critical paths within that chunk)
+* **Contract Tests** (100% of interfaces/APIs introduced in that chunk)
+
+**Important:** Test generation is **not optional** and must always follow immediately after code generation for the same chunk before moving forward.
+
+---
+
+## **Coverage Thresholds**
+
+| Metric       | Threshold |
+| ------------ | --------- |
+| Instructions | ≥ 90%     |
+| Branches     | ≥ 90%     |
+| Lines        | ≥ 95%     |
+| Methods      | ≥ 95%     |
+| Classes      | 100%      |
+
+---
+
+## **Execution Strategy**
+
+**Sequential Code + Test Flow**
+
+1. **Generate the code** for the current chunk.
+2. **Immediately analyze that chunk** and generate all three test types (unit, integration, contract).
+3. Only then proceed to the next chunk.
+
+**Chunk Order (strictly sequential):**
+
+1. DTOs & Types
+2. Utility Classes
+3. Exception Classes
+4. Controller Layer
+5. Service Layer
+6. Repository Layer
+7. Configuration Layer
+8. Full-layer Integration
+
+---
+
+## **Test Generation Rules**
+
+### **1. Unit Tests**
+
+* Cover all public/protected/private methods, constructors, branches, and exception flows.
+* Include boundary conditions, null/empty, DTO equality/hashcode, and annotations.
+* Must provide **line-by-line, instruction-by-instruction coverage**.
+
+### **2. Integration Tests**
+
+* Validate controller ↔ service, service ↔ repo, repo ↔ DB, service ↔ external client.
+* Simulate success, failure, and partial flows.
+* Include concurrency + transactional paths.
+
+### **3. Contract Tests**
+
+* Validate all service interfaces (REST, RPC, external).
+* Verify method, path, status, schema compliance.
+* Cover valid, invalid, and edge case payloads.
+
+---
+
+## **Layer-Specific Validation**
+
+* **Controller:** request mapping, validation, error handling.
+* **Service:** business logic, retries, exception handling.
+* **Repository:** CRUD + custom queries.
+* **Configuration:** bean setup & conditional loading.
+* **Exception Handling:** global + scoped mappers.
+
+---
+
+## **Restrictions**
+
+* No mocking frameworks or DI-based runners.
+* Do not use mockito since its not compatible with the java version.
+* All tests must be deterministic, portable, runnable in CI/CD.
+
+---
+
+## **Mandatory Output**
+
+For each chunk (before moving to the next):
+
+1. Generated application code.
+2. Matching **test code**:
+
+   * **Unit Tests** (80–90% coverage of that chunk)
+   * **Integration Tests** (70–80% of critical paths)
+   * **Contract Tests** (100% of new/exposed interfaces)

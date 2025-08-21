@@ -1,0 +1,50 @@
+# `V0.validation.txt` — Self-Healing Prompt Validator
+
+## **Objective**
+
+Continuously validate and enforce all requirements from the following prompt files until the application fully meets **100% of expectations**:
+
+* `V1.1_Language-specific.txt`
+* `V1.2_Common-guidlines.txt`
+* `V2.business-flow.txt`
+* `V3.Quality-Guardrails.txt`
+* `V4.post-generation.txt`
+* `V6_generate-open-api-spec-swagger.txt`
+
+---
+
+## **Validation Rules**
+
+1. **Strict Inclusion**
+
+   * Every instruction from all prompt files must be implemented.
+   * No instruction, word, or directive may be excluded, rephrased, or skipped.
+
+2. **Recursive Enforcement**
+
+   * After generation, perform a **full validation pass** against all prompts.
+   * If any requirement is missing, immediately **regenerate or fix the output**.
+   * Continue validating and regenerating until nothing is excluded.
+
+3. **Automatic Correction**
+
+   * On each failed validation:
+
+     * Identify the exact missing or diluted instruction.
+     * Re-apply it into the current application output.
+     * Re-run validation again.
+
+4. **Never Stop Until 100%**
+
+   * The process must not stop or exit early.
+   * The application is only considered complete when **all instructions are fully satisfied**.
+
+---
+
+## **Completion Criteria**
+
+* The application **must incorporate every detail** from all six prompt files.
+* Validation continues in a **loop** until no exclusions remain.
+* Final state = **100% compliance** with all prompt instructions.
+
+---
